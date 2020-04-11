@@ -82,4 +82,12 @@ smallestPositive xs =
     sort $ myFilter (> 0) xs
   of
     [] -> Nothing
-    arr -> Just $ head arr
+    xs -> Just $ head xs
+
+mapMaybe :: (a -> Maybe b) -> b -> [a] -> [b]
+mapMaybe _  _ [] = []
+mapMaybe fn d xs = map (\x -> 
+    case fn x of
+      Nothing -> d
+      Just el -> el
+  ) xs
