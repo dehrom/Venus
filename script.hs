@@ -56,3 +56,30 @@ isSorted (x0:x1:arr) = (x0 < x1) && isSorted arr
 apply :: (Num a, Eq a) => (a -> a) -> a -> a -> a
 apply _ a 0 = a
 apply fn a b = apply fn (fn a) (b - 1)
+
+myFilter :: (Eq a) => (a -> Bool) -> [a] -> [a]
+myFilter _ [] = []
+myFilter fn (x:xs) = 
+  if fn x 
+    then x : myFilter fn xs
+    else myFilter fn xs
+
+myAll :: (Eq a) => (a -> Bool) -> [a] -> Bool
+myAll _ [] = True
+myAll fn (x:xs) = fn x && myAll fn xs
+
+mapl :: (a -> b) -> [[a]] -> [[b]]
+mapl _ [] = []
+mapl fn (x:xs) = map fn x : mapl fn xs
+
+fn0 :: (Fractional a) => [a] -> [a]
+fn0 = reverse . map (/ 15)
+
+smallestPositive :: (Eq a, Num a, Ord a) => [a] -> Maybe a
+smallestPositive [] = Nothing
+smallestPositive xs = 
+  case 
+    sort $ myFilter (> 0) xs
+  of
+    [] -> Nothing
+    arr -> Just $ head arr
