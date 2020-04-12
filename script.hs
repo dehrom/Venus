@@ -91,3 +91,10 @@ mapMaybe fn d xs = map (\x ->
       Nothing -> d
       Just el -> el
   ) xs
+
+remove :: (Eq a) => a -> [(a, b)] -> [(a, b)]
+remove _ [] = []
+remove i ((k, v):xs) = 
+  if k == i
+  then xs
+  else (k, v) : remove k xs
