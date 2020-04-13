@@ -119,3 +119,9 @@ myUnzip :: [(a, b)]
         -> ([a], [b])
 myUnzip [] = ([], [])
 myUnzip ((k, v): xs) = (k: ks, v: vs) where (ks, vs) = myUnzip xs
+
+union :: [(a, b)] 
+      -> [(a, b)] 
+      -> [(a, b)]
+union [] [] = []
+union (x:xs) (x':xs') = x : x' : union xs xs'
