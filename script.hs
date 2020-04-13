@@ -114,3 +114,8 @@ myZip :: [a]
 myZip _ [] = []
 myZip [] _ = []
 myZip (k:ks) (v:vs) = (k, v) : myZip ks vs 
+
+myUnzip :: [(a, b)]
+        -> ([a], [b])
+myUnzip [] = ([], [])
+myUnzip ((k, v): xs) = (k: ks, v: vs) where (ks, vs) = myUnzip xs
