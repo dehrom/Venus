@@ -98,3 +98,12 @@ remove i ((k, v):xs) =
   if k == i
   then xs
   else (k, v) : remove k xs
+
+addIfNotExist :: (Eq k) 
+              => (k, v)
+              -> [(k, v)]
+              -> Maybe [(k, v)]
+addIfNotExist (k, v) xs =
+  case lookup k xs of
+    Nothing -> Just $ xs ++ [(k, v)]
+    Just _ -> Nothing
