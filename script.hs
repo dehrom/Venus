@@ -107,3 +107,10 @@ addIfNotExist (k, v) xs =
   case lookup k xs of
     Nothing -> Just $ xs ++ [(k, v)]
     Just _ -> Nothing
+
+myZip :: [a] 
+      -> [b] 
+      -> [(a, b)]
+myZip _ [] = []
+myZip [] _ = []
+myZip (k:ks) (v:vs) = (k, v) : myZip ks vs 
